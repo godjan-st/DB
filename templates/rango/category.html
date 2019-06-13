@@ -1,0 +1,30 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+	{% block title %}
+	Главная
+	{% endblock %}
+	{% block body_block %}
+	{% if user.is_authenticated %}
+	<h1 class="text-center">{{ category.name }}</h1>
+	<div class="tileitems_box">
+		<div class="wrp">
+			<div class="row panel-group tile_list">
+				{% for page in pages %}
+				<div class="col-sm-3 tile_item panel market_main">
+					<a href="/rango/page/{{ page.slurl }}" class="collapsed">
+						<figure class="logo">
+							<img class="default" src="{{ page.image.url }}" alt="book_img">
+						</figure>
+						<div class="title over">
+							{{ page.title }}
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% else %}
+	<h1 class="text-center">Данной категории не существует</h1>
+	{% endif %}
+	{% endblock %}

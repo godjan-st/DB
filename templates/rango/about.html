@@ -1,0 +1,12 @@
+{% extends "rango/base.html" %}
+{% block title %}
+	About page
+{% endblock %}
+{% block body_block %}
+	<h1>Страница информации</h1>
+	{% if user.is_authenticated %}
+		<a>{{ user.username }}, вы посетили наш сайт {{ visits }} раз!</a><br>
+	{% else %}
+		<a>Пожалуйста авторизуйтесь </a><br>
+	{% endif %}
+{% endblock %}

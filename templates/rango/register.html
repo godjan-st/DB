@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+		<link href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
+		<title>
+			ДБ - Вход
+		</title>
+	</head>
+	<body class="log_page">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script> -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+		<div class="log_wrap">
+			<a class="log_logo" href="/rango/"><img width="400" src="{% static 'h-logo.png' %}" alt="лого"></a>
+			<div class="log_menu">
+				<nav>
+					<a href="/rango/login/">Вход</a>
+					<a href="/rango/register/" class="active">Регистрация</a>
+				</nav>
+			</div>
+			<div class="log_body">
+				<div class="pad">
+					{% if not user.is_authenticated %}
+						<form id="user_form" method="POST" action="/rango/register/" enctype="multipart/form-data">
+							{% csrf_token %}
+							<ul class="form_list">
+								<li class="form-group">
+									<label class="text-muted">Имя пользователя</label>
+									{{ user_form.username }}
+								</li>
+								<li class="form-group">
+									<label class="text-muted">Адрес электронной почты</label>
+									{{ user_form.email }}
+								</li>
+								<li class="form-group form-avatar">
+									<label class="text-muted">Вебсайт</label>
+									{{ profile_form.website }}
+								</li>
+								<li class="form-group">
+									<label class="text-muted">Пароль</label>
+									{{ user_form.password }}
+								</li>
+								<li class="form-group">
+									<label class="text-muted">Повтор пароля</label>
+									{{ user_form.repeat_password }}
+								</li>								
+								<li class="form-group form-avatar">
+									<label class="text-muted">Аватар</label>
+									{{ profile_form.avatar }}
+								</li>
+								{% if result %}
+								<li class="form-group">
+									{{ result }}
+								</li>
+								{% endif %}
+								</ul>
+							<input class="btn btn-primary log_submit" type="submit" value="Зарегистрироваться" />
+						</form>
+					{% else %}
+						<strong>Ты уже вошел, {{ user.username }}!</strong>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
