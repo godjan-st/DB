@@ -17,7 +17,7 @@
 		<div class="header">
 			<div class="wrp">
 				<div class="db-logo">
-					<a href="/rango/"><img width="200" src="{% static 'h-logo.jpg' %}"></a>
+					<a href="/"><img width="200" src="{% static 'h-logo.jpg' %}"></a>
 				</div>
 				<div class="search-placeholder"></div>
 				<div class="user_head">
@@ -25,12 +25,12 @@
 					<ul class="list-inline">
 						<li class="list-inline-item"><div>Посещений: {{ visits }} </div></li>
 						<li class="list-inline-item"><div class="user_p">{{ user.username }}</div></li>
-						<li class="list-inline-item"><a class="btn btn-primary" href="/rango/logout/">Выход</a></li>
+						<li class="list-inline-item"><a class="btn btn-primary" href="/logout/">Выход</a></li>
 					</ul>
 					{% else %}
 					<ul class="list-inline">
-						<li class="list-inline-item"><a id="button_h" class="btn btn-primary" href="/rango/login/"><strong>Войти</strong></a></li>
-						<li class="list-inline-item"><a class="register" href="/rango/register/"><img width="20" height="20" src="{% static 'plus.png' %}" alt="plus"> Регистрация</a></li>
+						<li class="list-inline-item"><a id="button_h" class="btn btn-primary" href="/login/"><strong>Войти</strong></a></li>
+						<li class="list-inline-item"><a class="register" href="/register/"><img width="20" height="20" src="{% static 'plus.png' %}" alt="plus"> Регистрация</a></li>
 					</ul>
 					{% endif %}
 				</div>
@@ -52,7 +52,7 @@
 							<div class="border-top dropdown-menu" aria-labelledby="dropdown01">
 								{% if categories %}
 									{% for categ in categories %}
-									<a class="dropdown-item" href="/rango/category/{{ categ.slurl }}">{{ categ.name }}</a>
+									<a class="dropdown-item" href="/category/{{ categ.slurl }}">{{ categ.name }}</a>
 									{% endfor %}
 								{% else %}
 								<strong>Отсутствуют категории для показа</strong>
@@ -60,9 +60,9 @@
 							</div>
 						</div>
 						<div class="headmenu_second">
-							<a href="/rango/randompic/">Случайная книга</a>
-							<a href="/rango/about/">Контакты</a>
-							<a href="/rango/about/">О проекте</a>
+							<a href="/randompic/">Случайная книга</a>
+							<a href="/about/">Контакты</a>
+							<a href="/about/">О проекте</a>
 							</ul>
 						</div>
 					</nav>

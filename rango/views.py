@@ -15,7 +15,7 @@ import time
 def index(request):
 		piter = "piter.jpg"
 		category_list = Category.objects.order_by('name')
-		page_list = Page.objects.order_by('views')[:8]
+		page_list = Page.objects.order_by('views').reverse()[:8]
 		context_dict = {'boldmessage': "This is zhirniy text",
 						'mainpic': piter,
 						'categories': category_list,
@@ -93,8 +93,10 @@ def show_page(request, page_name_slug):
 	context_dict = {}
 	try:
 		page = Page.objects.get(slurl=page_name_slug)
+		if request.user.is_authenticated:
+			page.views+=1
+			page.save()
 		context_dict['page'] = page
-		page.views+=1
 	except Category.DoesNotExist:
 		context_dict['page'] = None	
 	if request.user.is_authenticated:
@@ -182,7 +184,7 @@ def login(request):
 		if user is not None:
 			if user.is_active:
 				auth_login(request, user)
-				return HttpResponseRedirect('/rango/')
+				return HttpResponseRedirect('/')
 			else:
 				context_dict = {'result': 'пользователь неактивен'}
 				return render(request, 'rango/login.html', context_dict)
@@ -195,4 +197,4 @@ def login(request):
 @login_required
 def logout_request(request):
 	logout(request)
-	return HttpResponseRedirect('/rango/')
+	return HttpResponseRedirect('/')
