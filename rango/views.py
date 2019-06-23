@@ -53,21 +53,23 @@ def aboutpage(request):
 	context_dict['categories']=category_list
 	return render(request, "rango/about.html", context_dict)
 def randompic(request):
-		pictures = [f for f in listdir(settings.STATIC_PATH) if isfile(join(settings.STATIC_PATH, f))]
-		key = randint(0, (len(pictures)-1))
-		randpic = pictures[key]
-		context_dict = {'boldmessage': "RANDOM PICTURE!",
-						'randpic': randpic}
-		if request.user.is_authenticated:
-			name = request.user
-			current_user = UserProfile.objects.get(user=name)
-			visits = current_user.visits
-			context_dict['visits']=visits
-		else:
-			context_dict['visits']=0
-		category_list = Category.objects.order_by('name')
-		context_dict['categories']=category_list
-		return render(request, "rango/randompic.html", context_dict)
+	context_dict = {}
+	pages = [f for f in Page.objects.all()]
+	key = randint(0, (len(pages))-1)
+	randpage = pages[key]
+	context_dict['page']=randpage
+	if request.user.is_authenticated:
+		randpage.views+=1
+		randpage.save()
+		name = request.user
+		current_user = UserProfile.objects.get(user=name)
+		visits = current_user.visits
+		context_dict['visits']=visits
+	else:
+		context_dict['visits']=0
+	category_list = Category.objects.order_by('name')
+	context_dict['categories']=category_list
+	return render(request, "rango/randompic.html", context_dict)
 def show_category(request, category_name_slug):
 	context_dict = {}
 	try:
@@ -93,13 +95,12 @@ def show_page(request, page_name_slug):
 	context_dict = {}
 	try:
 		page = Page.objects.get(slurl=page_name_slug)
-		if request.user.is_authenticated:
-			page.views+=1
-			page.save()
 		context_dict['page'] = page
-	except Category.DoesNotExist:
+	except page.DoesNotExist:
 		context_dict['page'] = None	
 	if request.user.is_authenticated:
+		page.views+=1
+		page.save()
 		name = request.user
 		current_user = UserProfile.objects.get(user=name)
 		visits = current_user.visits

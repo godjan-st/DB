@@ -29,8 +29,14 @@
 					</ul>
 					{% else %}
 					<ul class="list-inline">
-						<li class="list-inline-item"><a id="button_h" class="btn btn-primary" href="/login/"><strong>Войти</strong></a></li>
-						<li class="list-inline-item"><a class="register" href="/register/"><img width="20" height="20" src="{% static 'plus.png' %}" alt="plus"> Регистрация</a></li>
+						<li class="list-inline-item">
+							<a id="button_h" class="btn btn-primary" href="/login/"><strong>Войти</strong></a>
+						</li>
+						<li class="list-inline-item">
+							<a class="register" href="/register/">
+								<img width="20" height="20" src="{% static 'plus.png' %}" alt="plus"> Регистрация
+							</a>
+						</li>
 					</ul>
 					{% endif %}
 				</div>

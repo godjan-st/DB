@@ -272,6 +272,13 @@ strong{
 .product_img_big { float: left; width: 100%; border: 1px solid #f0f0f0; text-align: center; }
 .product_img_big img { padding: 20px; }
 
+/* страница контактов и о проекте */
+
+.a_text {
+	height: 500px;
+	margin-top: 60px;
+}
+
 @font-face {
 	font-family: "Exo 2";
 	src: url("fonts/Exo2-Regular.otf") format("opentype");
